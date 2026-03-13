@@ -4,9 +4,9 @@ PolyNotice is a trading intelligence platform built for prediction market trader
 This repository contains the official landing page, including the waitlist, roadmap, and links to documentation.
 
 # What PolyNotice Does
-PolyNotice aims to solve a major problem in prediction markets: lack of trade alerts and automation.
+#### PolyNotice aims to solve a major problem in prediction markets: lack of trade alerts and automation.
 
-The platform will allow traders to:
+> The platform will allow traders to:
 
 * Receive price alerts
 * Monitor active trades and portfolio positions
@@ -16,7 +16,7 @@ The platform will allow traders to:
 * Automate certain trading actions when away
 
 # Landing Page Purpose
-This repository powers the PolyNotice marketing page, which includes:
+> This repository powers the PolyNotice marketing page, which includes:
 
 * Project overview
 * Public roadmap
@@ -31,7 +31,7 @@ PolyNotice is currently in early development.
 The landing page will act as the public entry point while the core platform is being built.
 
 # Roadmap Highlights
-Upcoming development includes:
+> Upcoming development includes:
 
 * Alert system for prediction market trades
 * Portfolio monitoring tools
@@ -41,7 +41,7 @@ Upcoming development includes:
 More details are available in the project documentation.
 
 # Links
-Website: Coming Soon
+Website: Coming Soon.
 X (Twitter): https://x.com/PolyNotice
 
 # Disclaimer
