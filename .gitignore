@@ -1,0 +1,56 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Dependencies
+node_modules/
+vendor/
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+*.sql.bak
+
+# OS Files
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build outputs
+dist/
+build/
+
+# Cache
+.cache/
+*.cache
+
+# Config (keep example)
+# .env  - Already excluded above
+config.local.php
+
+# Backups
+*.backup
+*.bak
+*.old
+
+# Compiled files
+*.pyc
+*.php.bak

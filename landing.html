@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PolyNotice - Trading Intelligence Platform</title>
+  <link rel="stylesheet" href="landing.css">
+</head>
+
+<body>
+  <!-- Navigation Header -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo-block">
+        <svg class="logo" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="8" fill="#3B82F6" />
+          <path d="M20 10L28 25H12L20 10Z" fill="white" />
+          <circle cx="20" cy="30" r="2" fill="white" />
+        </svg>
+        <span class="logo-text">PolyNotice</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#roadmap" class="nav-link">Roadmap</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="https://docs.polynotice.com" class="nav-link" target="_blank">Docs</a>
+        <a href="#waitlist" class="nav-link nav-link-cta">Join Waitlist</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Trading Intelligence for Prediction Markets</h1>
+      <p class="hero-subtitle">Stay ahead with real-time alerts, trade monitoring, and automation designed for Polymarket traders.</p>
+      
+      <div class="hero-buttons">
+        <button class="btn btn-primary" id="heroWaitlistBtn">Join Waitlist</button>
+        <a href="https://docs.polynotice.com" class="btn btn-secondary" target="_blank">View Docs</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">Alerts</span>
+          <span class="stat-label">Price monitoring</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">Automation</span>
+          <span class="stat-label">Smart execution</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">Signals</span>
+          <span class="stat-label">Signal discovery</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="section-header">
+      <h2>Powerful Features</h2>
+      <p>Everything you need to trade smarter</p>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🚨</div>
+        <h3>Price Alerts</h3>
+        <p>Get instant notifications when market prices hit your targets</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Portfolio Monitor</h3>
+        <p>Track all your positions in real-time with detailed analytics</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚙️</div>
+        <h3>Automation</h3>
+        <p>Set up automated trades and execute orders when market conditions match</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Signal Discovery</h3>
+        <p>Discover trading signals from top performing traders</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Smart Orders</h3>
+        <p>Set take-profit and stop-loss orders automatically</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <h3>Account Tracking</h3>
+        <p>Monitor top performing accounts and their strategies</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap Section -->
+  <section class="roadmap" id="roadmap">
+    <div class="section-header">
+      <h2>Product Roadmap</h2>
+      <p>See what we're building next</p>
+    </div>
+
+    <div class="roadmap-timeline">
+      <div class="roadmap-phase">
+        <div class="phase-marker">Phase 1</div>
+        <div class="phase-content">
+          <h3>Foundation</h3>
+          <ul>
+            <li>Alert system for prediction markets</li>
+            <li>Real-time price monitoring</li>
+            <li>Basic portfolio tracking</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-phase">
+        <div class="phase-marker">Phase 2</div>
+        <div class="phase-content">
+          <h3>Intelligence</h3>
+          <ul>
+            <li>Smart signals and account tracking</li>
+            <li>Advanced analytics dashboard</li>
+            <li>Trading signal discovery</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-phase">
+        <div class="phase-marker">Phase 3</div>
+        <div class="phase-content">
+          <h3>Automation</h3>
+          <ul>
+            <li>Automated trade execution</li>
+            <li>Smart order management</li>
+            <li>API integrations</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="roadmap-phase">
+        <div class="phase-marker">Phase 4</div>
+        <div class="phase-content">
+          <h3>Scale</h3>
+          <ul>
+            <li>Multi-chain support</li>
+            <li>Advanced risk management</li>
+            <li>Enterprise features</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Waitlist Section -->
+  <section class="waitlist" id="waitlist">
+    <div class="waitlist-container">
+      <div class="waitlist-content">
+        <h2>Be First. Stay Ahead.</h2>
+        <p>Join our waitlist to get early access and exclusive updates</p>
+        
+        <form class="waitlist-form" id="waitlistForm">
+          <div class="form-group">
+            <input 
+              type="email" 
+              placeholder="your@email.com" 
+              class="form-input" 
+              id="emailInput"
+              required
+            >
+            <button type="submit" class="btn btn-primary">Join Waitlist</button>
+          </div>
+          <div class="form-message" id="formMessage"></div>
+        </form>
+
+        <div class="waitlist-benefits">
+          <p>✓ Early access to platform</p>
+          <p>✓ Exclusive feature previews</p>
+          <p>✓ Direct feedback channel</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Product</h4>
+        <a href="https://docs.polynotice.com" target="_blank">Documentation</a>
+        <a href="#roadmap">Roadmap</a>
+      </div>
+      <div class="footer-section">
+        <h4>Links</h4>
+        <a href="https://x.com/PolyNotice" target="_blank">X (Twitter)</a>
+        <a href="mailto:polynotice@gmail.com">Email</a>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 PolyNotice. All rights reserved.</p>
+      <p class="disclaimer">PolyNotice does not provide financial advice. All tools are designed to assist in monitoring and managing your own trading strategies.</p>
+    </div>
+  </footer>
+
+  <script src="landing.js"></script>
+</body>
+
+</html>
