@@ -51,3 +51,37 @@ function updateSpanEffects(x, y) {
 document.addEventListener('touchmove', function (e) {
   // Allow scrolling but enhance interactivity
 }, { passive: true });
+
+
+// HIGHLIGHT SPANS BEHIND CONTENT ON HOVER //
+const contentLayer = document.querySelector('.content-layer');
+
+document.addEventListener('mousemove', (e) => {
+  const x = e.clientX;
+  const y = e.clientY;
+
+  // Check if mouse is over content layer (hero/buttons area)
+  const contentElement = document.elementFromPoint(x, y);
+  const isOverContent = contentElement && (contentElement.closest('.hero') || contentElement.closest('.header') || contentElement.closest('.btn'));
+
+  if (isOverContent) {
+    // Find and highlight spans near the mouse position
+    spans.forEach(span => {
+      const rect = span.getBoundingClientRect();
+      const spanCenterX = rect.left + rect.width / 2;
+      const spanCenterY = rect.top + rect.height / 2;
+
+      const distance = Math.hypot(x - spanCenterX, y - spanCenterY);
+      const radius = 50;
+
+      if (distance < radius) {
+        span.classList.add('active-touch');
+      } else {
+        span.classList.remove('active-touch');
+      }
+    });
+  } else {
+    // Remove all highlights when not over content
+    spans.forEach(span => span.classList.remove('active-touch'));
+  }
+});
