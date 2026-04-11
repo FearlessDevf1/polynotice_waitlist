@@ -1,274 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <title>PolyNotice - Prediction Market Intelligence</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+<head>
+  <title>PolyNotice - Prediction Market Intelligence</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="icon" href="../assets/polynotice_logo.jpg" type="image/x-icon" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  </head>
+</head>
 
-  <body>
-    <div class="content-layer">
-      <header class="header">
-        <div class="logo-container">
-          <img src="../assets/polynotice_logo.jpg" alt="PolyNotice Logo" class="logo">
+<body>
+  <!-- Header aligned with top row of spans -->
+  <header class="top-header">
+    <div class="header-logo">
+      <img src="../assets/polynotice_logo.jpg" alt="PolyNotice Logo" class="logo-img">
+    </div>
+    <span class="logo-text">PolyNotice</span>
+    <nav class="nav-desktop">
+      <a href="#docs" class="nav-link">Docs</a>
+      <a href="#roadmap" class="nav-link">Roadmap</a>
+      <a href="#waitlist" class="nav-link">Waitlist</a>
+    </nav>
+    <button class="hamburger-btn" id="hamburger-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav class="nav-mobile" id="nav-mobile">
+      <a href="#docs" class="nav-link-mobile">Docs</a>
+      <a href="#roadmap" class="nav-link-mobile">Roadmap</a>
+      <a href="#waitlist" class="nav-link-mobile">Waitlist</a>
+    </nav>
+  </header>
+
+  <div class="content-layer" style="margin-top: 100px;">
+    <div class="hero">
+      <h1 class="headline">Trading Intelligence for Prediction Markets</h1>
+      <p class="tagline">Stay ahead with real-time alerts, trade monitoring, and automation designed for Polymarket traders.</p>
+      <div class="cta-buttons">
+        <button class="btn btn-primary" id="join-waitlist-btn">Join Waitlist</button>
+        <button class="btn btn-secondary" onclick="window.location.hash='#docs'">View Docs</button>
+      </div>
+    </div>
+
+    <!-- Trust & Value Strip -->
+    <div class="trust-strip">
+      <div class="trust-items">
+        <div class="trust-item">
+          <div class="trust-icon">📊</div>
+          <p class="trust-text">Built for prediction market traders</p>
         </div>
-      </header>
-      <div class="hero">
-        <h1 class="headline">PolyNotice</h1>
-        <p class="subtext">Your Notice, Everywhere</p>
-        <div class="cta-buttons">
-          <button class="btn btn-primary">Get Started</button>
-          <button class="btn btn-secondary">Learn More</button>
+        <div class="trust-item">
+          <div class="trust-icon">⚡</div>
+          <p class="trust-text">Real-time alerts</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">🧠</div>
+          <p class="trust-text">Smarter trading decisions</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">🚀</div>
+          <p class="trust-text">Stay ahead of the market</p>
         </div>
       </div>
     </div>
-    <section>
 
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+    <!-- Features Section -->
+    <div class="features-section">
+      <div class="features-container">
+        <h2 class="features-title">Features</h2>
+        <p class="features-subtitle">Everything you need to stay ahead in prediction markets</p>
 
-      
-    </section>
+        <div class="features-grid">
+          <div class="features-card">
+            <h3 class="feature-title">Price Alerts</h3>
+            <p class="feature-description">Get notified when prices hit your target levels</p>
+          </div>
+          <div class="features-card">
+            <h3 class="feature-title">Trade Monitoring</h3>
+            <p class="feature-description">Real-time tracking of your market positions</p>
+          </div>
+          <div class="features-card">
+            <h3 class="feature-title">Smart Signals</h3>
+            <p class="feature-description">AI-powered trading signals and insights</p>
+          </div>
+          <div class="features-card">
+            <h3 class="feature-title">Automation</h3>
+            <p class="feature-description">Automatically execute your trading strategies</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  </body>
-  <script src="script.js"></script>
+    <!-- Roadmap Section -->
+    <div class="roadmap-section">
+      <div class="roadmap-container">
+        <h2 class="roadmap-title">Roadmap</h2>
+
+        <div class="roadmap-grid">
+          <div class="roadmap-card roadmap-card-1">
+            <h3 class="roadmap-phase">Phase 1 – Monitoring</h3>
+            <p class="roadmap-description">Track trades and receive real-time alerts</p>
+          </div>
+          <div class="roadmap-card roadmap-card-2">
+            <h3 class="roadmap-phase">Phase 2 – Intelligence</h3>
+            <p class="roadmap-description">AI-powered insights and market analysis</p>
+          </div>
+          <div class="roadmap-card roadmap-card-3">
+            <h3 class="roadmap-phase">Phase 3 – Automation</h3>
+            <p class="roadmap-description">Automated trading strategies and execution</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final CTA Section -->
+    <div class="final-cta-section">
+      <div class="final-cta-container">
+        <h2 class="final-cta-headline">Join early traders using PolyNotice</h2>
+        <p class="final-cta-subtext">Get notified when we launch and gain early access to powerful trading tools.</p>
+
+        <div class="final-cta-form-wrapper">
+          <form class="final-cta-form" id="final-cta-form">
+            <input type="email" class="final-cta-input" id="final-cta-email" placeholder="Enter your email" required>
+            <button type="submit" class="btn final-cta-btn">Join Waitlist</button>
+          </form>
+          <div class="final-cta-message" id="final-cta-message"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-links">
+          <a href="#docs" class="footer-link">Docs</a>
+          <a href="#roadmap" class="footer-link">Roadmap</a>
+          <a href="https://twitter.com" target="_blank" class="footer-link">X (Twitter)</a>
+          <a href="mailto:polynotice@gmail.com" class="footer-link">Email</a>
+        </div>
+        <p class="footer-copyright">PolyNotice © 2026. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+  <section>
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+
+  </section>
+
+</body>
+<script src="script.js"></script>
 
 </html>
