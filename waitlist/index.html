@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <!-- Header aligned with top row of spans -->
+  <!--===== HEADER ALIGNED WITH TOP ROW OF SPANS =====-->
   <header class="top-header">
     <div class="header-logo">
       <img src="../assets/polynotice_logo.jpg" alt="PolyNotice Logo" class="logo-img">
@@ -25,6 +25,7 @@
       <a href="#roadmap" class="nav-link">Roadmap</a>
       <a href="#waitlist" class="nav-link">Waitlist</a>
     </nav>
+    <!-- for mobile -->
     <button class="hamburger-btn" id="hamburger-btn">
       <span></span>
       <span></span>
@@ -38,91 +39,128 @@
   </header>
 
   <div class="content-layer" style="margin-top: 100px;">
+    <!--===== HERO SECTION =====-->
     <div class="hero">
       <h1 class="headline">Trading Intelligence for Prediction Markets</h1>
-      <p class="tagline">Stay ahead with real-time alerts, trade monitoring, and automation designed for Polymarket traders.</p>
+      <p class="tagline">Stay ahead with real-time alerts, trade monitoring, and automation designed for Polymarket
+        traders.</p>
       <div class="cta-buttons">
         <button class="btn btn-primary" id="join-waitlist-btn">Join Waitlist</button>
         <button class="btn btn-secondary" onclick="window.location.hash='#docs'">View Docs</button>
       </div>
     </div>
 
-    <!-- Trust & Value Strip -->
-    <div class="trust-strip">
-      <div class="trust-items">
-        <div class="trust-item">
-          <div class="trust-icon">📊</div>
-          <p class="trust-text">Built for prediction market traders</p>
+    <!--===== CONTENT SECTIONS WRAPPER =====-->
+    <div class="content-sections-wrapper">
+      <!--===== TRUST & VALUE STRIP =====-->
+      <div class="trust-strip">
+        <div class="trust-items">
+          <div class="trust-item">
+            <div class="trust-icon">📊</div>
+            <p class="trust-text">Built for prediction market traders</p>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">⚡</div>
+            <p class="trust-text">Real-time alerts</p>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">🧠</div>
+            <p class="trust-text">Smarter trading decisions</p>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">🚀</div>
+            <p class="trust-text">Stay ahead of the market</p>
+          </div>
         </div>
-        <div class="trust-item">
-          <div class="trust-icon">⚡</div>
-          <p class="trust-text">Real-time alerts</p>
+      </div>
+
+      <!--===== FEATURES SECTION =====-->
+      <div class="features-section">
+        <div class="features-container">
+          <h2 class="features-title">Features</h2>
+          <p class="features-subtitle">Everything you need to stay ahead in prediction markets</p>
+
+          <div class="features-grid">
+            <div class="features-card">
+              <h3 class="feature-title">Price Alerts</h3>
+              <p class="feature-description">Get instant notifications when market prices hit your targets</p>
+            </div>
+            <div class="features-card">
+              <h3 class="feature-title">Trade Monitoring</h3>
+              <p class="feature-description">Real-time tracking of your market positions</p>
+            </div>
+            <div class="features-card">
+              <h3 class="feature-title">Smart Signals</h3>
+              <p class="feature-description">AI-powered trading signals and insights</p>
+            </div>
+            <div class="features-card">
+              <h3 class="feature-title">Automation</h3>
+              <p class="feature-description">Set up automated trades and execute orders when market conditions match</p>
+            </div>
+            <div class="features-card">
+              <h3 class="feature-title">Signal Discovery</h3>
+              <p class="feature-description">Discover trading signals from top performing traders</p>
+            </div>
+            <div class="features-card">
+              <h3 class="feature-title">Account Tracking</h3>
+              <p class="feature-description">Monitor top performing accounts and their strategies</p>
+            </div>
+          </div>
         </div>
-        <div class="trust-item">
-          <div class="trust-icon">🧠</div>
-          <p class="trust-text">Smarter trading decisions</p>
-        </div>
-        <div class="trust-item">
-          <div class="trust-icon">🚀</div>
-          <p class="trust-text">Stay ahead of the market</p>
+      </div>
+
+      <!--===== ROADMAP SECTION =====-->
+      <div class="roadmap-section">
+        <div class="roadmap-container">
+          <h2 class="roadmap-title">Roadmap</h2>
+
+          <div class="roadmap-grid">
+            <div class="roadmap-card roadmap-card-1">
+              <h3 class="roadmap-phase">Phase 1</h3>
+              <h4 class="roadmap-subtitle">Foundation</h4>
+              <ul class="roadmap-features">
+                <li>Alert system for prediction markets</li>
+                <li>Real-time price monitoring</li>
+                <li>Basic portfolio tracking</li>
+              </ul>
+            </div>
+            <div class="roadmap-card roadmap-card-2">
+              <h3 class="roadmap-phase">Phase 2</h3>
+              <h4 class="roadmap-subtitle">Intelligence</h4>
+              <ul class="roadmap-features">
+                <li>Smart signals and account tracking</li>
+                <li>Advanced analytics dashboard</li>
+                <li>Trading signal discovery</li>
+              </ul>
+            </div>
+            <div class="roadmap-card roadmap-card-3">
+              <h3 class="roadmap-phase">Phase 3</h3>
+              <h4 class="roadmap-subtitle">Automation</h4>
+              <ul class="roadmap-features">
+                <li>Automated trade execution</li>
+                <li>Smart order management</li>
+                <li>API integrations</li>
+              </ul>
+            </div>
+            <div class="roadmap-card roadmap-card-4">
+              <h3 class="roadmap-phase">Phase 4</h3>
+              <h4 class="roadmap-subtitle">Scale</h4>
+              <ul class="roadmap-features">
+                <li>Multi-chain support</li>
+                <li>Advanced risk management</li>
+                <li>Enterprise features</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Features Section -->
-    <div class="features-section">
-      <div class="features-container">
-        <h2 class="features-title">Features</h2>
-        <p class="features-subtitle">Everything you need to stay ahead in prediction markets</p>
-
-        <div class="features-grid">
-          <div class="features-card">
-            <h3 class="feature-title">Price Alerts</h3>
-            <p class="feature-description">Get instant notifications when market prices hit your targets</p>
-          </div>
-          <div class="features-card">
-            <h3 class="feature-title">Trade Monitoring</h3>
-            <p class="feature-description">Real-time tracking of your market positions</p>
-          </div>
-          <div class="features-card">
-            <h3 class="feature-title">Smart Signals</h3>
-            <p class="feature-description">AI-powered trading signals and insights</p>
-          </div>
-          <div class="features-card">
-            <h3 class="feature-title">Automation</h3>
-            <p class="feature-description">Automatically execute your trading strategies</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Roadmap Section -->
-    <div class="roadmap-section">
-      <div class="roadmap-container">
-        <h2 class="roadmap-title">Roadmap</h2>
-
-        <div class="roadmap-grid">
-          <div class="roadmap-card roadmap-card-1">
-            <h3 class="roadmap-phase">Phase 1 – Monitoring</h3>
-            <p class="roadmap-description">Track trades and receive real-time alerts</p>
-          </div>
-          <div class="roadmap-card roadmap-card-2">
-            <h3 class="roadmap-phase">Phase 2 – Intelligence</h3>
-            <p class="roadmap-description">AI-powered insights and market analysis</p>
-          </div>
-          <div class="roadmap-card roadmap-card-3">
-            <h3 class="roadmap-phase">Phase 3 – Automation</h3>
-            <p class="roadmap-description">Automated trading strategies and execution</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Final CTA Section -->
+    <!--===== FINAL CTA SECTION =====-->
     <div class="final-cta-section">
       <div class="final-cta-container">
-        <h2 class="final-cta-headline">Join early traders using PolyNotice</h2>
-        <p class="final-cta-subtext">Get notified when we launch and gain early access to powerful trading tools.</p>
+        <h2 class="final-cta-headline">Be First. Stay Ahead.</h2>
+        <p class="final-cta-subtext">Join our waitlist to get early access and exclusive updates</p>
 
         <div class="final-cta-form-wrapper">
           <form class="final-cta-form" id="final-cta-form">
@@ -131,10 +169,16 @@
           </form>
           <div class="final-cta-message" id="final-cta-message"></div>
         </div>
+
+        <div class="final-cta-benefits">
+          <div class="benefit-item">✓ Early access to platform</div>
+          <div class="benefit-item">✓ Exclusive feature previews</div>
+          <div class="benefit-item">✓ Direct feedback channel</div>
+        </div>
       </div>
     </div>
 
-    <!-- Footer -->
+    <!--===== FOOTER =====-->
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-links">
@@ -144,6 +188,8 @@
           <a href="mailto:polynotice@gmail.com" class="footer-link">Email</a>
         </div>
         <p class="footer-copyright">PolyNotice © 2026. All rights reserved.</p>
+        <p class="footer-disclaimer">PolyNotice does not provide financial advice. All tools are designed to assist in
+          monitoring and managing your own trading strategies.</p>
       </div>
     </footer>
   </div>
