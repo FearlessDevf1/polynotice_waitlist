@@ -1,62 +1,7 @@
-// ===== EMAIL REGEX VALIDATION =====
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { subscribeEmail } from './lib/subscribe-client.js';
 
-// ===== GENERIC FORM HANDLER =====
-function handleFormSubmit(formElement, emailInputElement, messageElement) {
-  formElement.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const email = emailInputElement.value.trim();
-    
-    // Validate email
-    if (!EMAIL_REGEX.test(email)) {
-      showFormMessage(messageElement, 'Please enter a valid email address', 'error');
-      return;
-    }
-
-    // Show loading state
-    showFormMessage(messageElement, 'Subscribing...', '');
-
-    try {
-      // Simulate API call (replace with actual endpoint)
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      }).catch(() => {
-        return { ok: true };
-      });
-
-      if (response.ok) {
-        showFormMessage(messageElement, '✓ You\'re on the waitlist! Check your email.', 'success');
-        emailInputElement.value = '';
-      } else {
-        showFormMessage(messageElement, 'Something went wrong. Please try again.', 'error');
-      }
-    } catch (error) {
-      showFormMessage(messageElement, 'Network error. Please try again.', 'error');
-    }
-  });
-}
-
-// ===== SHOW FORM MESSAGE =====
-function showFormMessage(element, text, type) {
-  element.textContent = text;
-  element.className = type ? `${element.className.split(' ')[0]} ${type}` : element.className.split(' ')[0];
-  
-  // Auto-clear error messages after 5 seconds
-  if (type === 'error') {
-    setTimeout(() => {
-      element.textContent = '';
-      element.className = element.className.split(' ')[0];
-    }, 5000);
-  }
-}
-
+// ===== HEADER =====
 document.addEventListener('DOMContentLoaded', () => {
-  // ===== HAMBURGER MENU TOGGLE =====
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const navMobile = document.getElementById('nav-mobile');
   const navLinksMobile = document.querySelectorAll('.nav-link-mobile');
@@ -87,7 +32,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===== FINAL CTA FORM HANDLING =====
+  // ===== FINAL CTA SECTION =====
+
+  // generic form handler
+  function handleFormSubmit(formElement, emailInputElement, messageElement) {
+    formElement.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = emailInputElement.value.trim();
+
+      // Show loading state
+      showFormMessage(messageElement, 'Subscribing...', '');
+
+      try {
+        const result = await subscribeEmail(email);
+
+        if (result.success) {
+          showFormMessage(messageElement, result.message, 'success');
+          emailInputElement.value = '';
+        } else {
+          showFormMessage(messageElement, result.message, 'error');
+        }
+      } catch (error) {
+        showFormMessage(messageElement, 'Network error. Please try again.', 'error');
+      }
+    });
+  }
+
+  // show form message
+  function showFormMessage(element, text, type) {
+    element.textContent = text;
+    element.className = type ? `${element.className.split(' ')[0]} ${type}` : element.className.split(' ')[0];
+    
+    // Auto-clear error messages after 5 seconds
+    if (type === 'error') {
+      setTimeout(() => {
+        element.textContent = '';
+        element.className = element.className.split(' ')[0];
+      }, 5000);
+    }
+  }
+
   const finalCtaForm = document.getElementById('final-cta-form');
   const finalCtaEmail = document.getElementById('final-cta-email');
   const finalCtaMessage = document.getElementById('final-cta-message');
@@ -97,7 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// MOBILE TOUCH EFFECT - REPLICATE HOVER BEHAVIOR ON MOBILE DEVICES //
+// ===== INTERACTIVE EFFECTS =====
+// ===== MOBILE TOUCH EFFECT - REPLICATE HOVER BEHAVIOR ON MOBILE DEVICES =====
 const spans = document.querySelectorAll('section span');
 
 // Handle touch movement
@@ -117,6 +103,7 @@ document.addEventListener('touchend', () => {
   spans.forEach(span => span.classList.remove('active-touch'));
 }, { passive: true });
 
+// ===== UPDATE SPAN EFFECTS =====
 function updateSpanEffects(x, y) {
   spans.forEach(span => {
     const rect = span.getBoundingClientRect();
@@ -137,7 +124,7 @@ function updateSpanEffects(x, y) {
   });
 }
 
-// HIGHLIGHT SPANS BEHIND CONTENT ON HOVER //
+// ===== HIGHLIGHT SPANS BEHIND CONTENT ON HOVER =====
 document.addEventListener('mousemove', (e) => {
   const x = e.clientX;
   const y = e.clientY;

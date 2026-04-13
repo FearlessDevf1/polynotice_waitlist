@@ -278,7 +278,7 @@ section {
   pointer-events: auto;
 }
 
-/* Hero Section */
+/* ===== HERO SECTION ===== */
 .hero {
   text-align: center;
   color: var(--color-text);
@@ -354,83 +354,13 @@ section {
   transform: translateY(-2px);
 }
 
-/* Waitlist Form */
-.waitlist-form-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.waitlist-form {
-  display: flex;
-  gap: 0.75rem;
-  width: 100%;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.email-input {
-  padding: 0.875rem 1.5rem;
-  font-size: 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid var(--primary-40);
-  border-radius: 4px;
-  color: var(--color-text);
-  min-width: 250px;
-  transition: var(--transition);
-  font-family: inherit;
-}
-
-.email-input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.email-input:focus {
-  outline: none;
-  background: rgba(255, 255, 255, 0.15);
-  border-color: var(--primary-80);
-  box-shadow: 0 0 15px var(--primary-30);
-}
-
-.btn-submit {
-  background: var(--color-primary);
-  color: var(--color-text);
-  padding: 0.875rem 2rem;
-  min-width: fit-content;
-}
-
-.btn-submit:hover {
-  background: var(--color-primary-dark);
-  box-shadow: 0 0 20px var(--primary-60);
-  transform: translateY(-2px);
-}
-
-.form-message {
-  font-size: 0.95rem;
-  min-height: 1.5rem;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.form-message.success {
-  color: var(--color-success);
-  text-shadow: 0 0 10px rgba(74, 222, 128, 0.3);
-}
-
-.form-message.error {
-  color: var(--color-error);
-  text-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
-}
-
+/* ===== TRUST & VALUE STRIP ===== */
 /* Content Sections Wrapper */
 .content-sections-wrapper {
   width: 90%;
   backdrop-filter: brightness(40%);
 }
 
-/* Trust & Value Strip */
 .trust-strip {
   width: 100%;
   padding: 3rem 2rem;
@@ -480,7 +410,7 @@ section {
   margin: 0;
 }
 
-/* Features Section */
+/* ===== FEATURES SECTION ===== */
 .features-section {
   width: 100%;
   padding: 3rem 2rem;
@@ -558,7 +488,7 @@ section {
   line-height: 1.4;
 }
 
-/* Roadmap Section */
+/* ===== ROADMAP SECTION ===== */
 .roadmap-section {
   width: 100%;
   padding: 3rem 2rem;
@@ -669,7 +599,7 @@ section {
   line-height: 1.3;
 }
 
-/* Final CTA Section */
+/* ===== FINAL CTA SECTION ===== */
 .final-cta-section {
   width: 100%;
   padding: 4rem 2rem;
@@ -797,7 +727,7 @@ section {
   letter-spacing: 0.3px;
 }
 
-/* Footer */
+/* ===== FOOTER ===== */
 .footer {
   width: 100%;
   padding: 3rem 2rem;
@@ -870,6 +800,7 @@ section {
   }
 }
 
+/* ===== SECTION / SPAN ===== */
 section::before {
   content: "";
   position: absolute;
@@ -910,7 +841,7 @@ section span.active-touch {
   transition: 0s;
 }
 
-/* Responsive Design */
+/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 900px) {
 
   /* Show hamburger, hide desktop nav */

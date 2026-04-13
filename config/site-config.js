@@ -25,9 +25,9 @@ const siteConfig = {
   // Social Links
   social: {
     twitter: 'https://x.com/PolyNotice',
-    email: 'hello@polynotice.io',
-    security: 'security@polynotice.io',
-    legal: 'legal@polynotice.io',
+    email: 'polynotice@proton.me',
+    security: 'polynotice@proton.me',
+    legal: 'polynotice@proton.me',
   },
 
   // Feature Flags

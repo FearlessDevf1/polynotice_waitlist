@@ -54,8 +54,8 @@ Full documentation is available in the `/docs` folder:
 
 - **Website:** https://polynotice.io
 - **Twitter/X:** [@PolyNotice](https://x.com/PolyNotice)
-- **Email:** hello@polynotice.io
-- **Security:** security@polynotice.io
+- **Email:** polynotice@proton.me
+- **Security:** polynotice@proton.me
 
 ## License
 

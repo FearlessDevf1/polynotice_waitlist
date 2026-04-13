@@ -1,8 +1,3 @@
-/**
- * Waitlist Subscription API
- * Handles email subscriptions for the PolyNotice waitlist
- */
-
 export const WAITLIST_CONFIRMATION_EMAIL = {
   from: 'polynotice@proton.me',
   subject: "You're in, welcome to PolyNotice",
@@ -39,7 +34,13 @@ export async function subscribeEmail(email) {
       };
     }
 
-    // Call backend API endpoint
+    if (isLocalPreview()) {
+      return {
+        success: true,
+        message: 'Local preview mode: subscription simulated successfully.',
+      };
+    }
+
     const response = await fetch('/api/subscribe', {
       method: 'POST',
       headers: {
@@ -48,7 +49,7 @@ export async function subscribeEmail(email) {
       body: JSON.stringify({ email }),
     });
 
-    const data = await response.json();
+    const data = await parseResponseData(response);
 
     if (!response.ok) {
       return {
@@ -59,21 +60,33 @@ export async function subscribeEmail(email) {
 
     return {
       success: true,
-      message: 'Successfully added to waitlist! Check your email for confirmation.',
+      message: data.message || 'Successfully added to waitlist! Check your email for confirmation.',
     };
   } catch (error) {
     console.error('Subscription error:', error);
     return {
       success: false,
-      message: 'An error occurred. Please try again later.',
+      message: 'The subscription service is unavailable right now. Please try again later.',
     };
   }
 }
 
-/**
- * Validate email format
- */
+async function parseResponseData(response) {
+  const contentType = response.headers.get('content-type') || '';
+
+  if (contentType.includes('application/json')) {
+    return response.json();
+  }
+
+  const text = await response.text();
+  return { message: text.trim() };
+}
+
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
+}
+
+function isLocalPreview() {
+  return ['localhost', '127.0.0.1'].includes(window.location.hostname);
 }
