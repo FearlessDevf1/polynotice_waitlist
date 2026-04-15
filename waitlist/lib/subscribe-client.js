@@ -34,12 +34,12 @@ export async function subscribeEmail(email) {
       };
     }
 
-    if (isLocalPreview()) {
-      return {
-        success: true,
-        message: 'Local preview mode: subscription simulated successfully.',
-      };
-    }
+    // if (isLocalPreview()) {
+    //   return {
+    //     success: true,
+    //     message: 'Local preview mode: subscription simulated successfully.',
+    //   };
+    // }
 
     const response = await fetch('/api/subscribe', {
       method: 'POST',
@@ -87,6 +87,6 @@ function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
-function isLocalPreview() {
-  return ['localhost', '127.0.0.1'].includes(window.location.hostname);
-}
+// function isLocalPreview() {
+//   return ['localhost', '127.0.0.1'].includes(window.location.hostname);
+// }

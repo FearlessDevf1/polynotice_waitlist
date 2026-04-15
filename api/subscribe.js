@@ -59,6 +59,28 @@ async function sendConfirmationEmail(email) {
   }
 }
 
+function getClientErrorMessage(error) {
+  const message = error?.message || '';
+
+  if (message.includes('Missing RESEND_API_KEY')) {
+    return 'RESEND_API_KEY is missing in the Vercel environment variables.';
+  }
+
+  if (message.includes('Resend request failed: 401')) {
+    return 'Resend rejected the API key. Check that RESEND_API_KEY is correct in Vercel.';
+  }
+
+  if (message.includes('Resend request failed: 403')) {
+    return 'Resend rejected the sender configuration. Verify your sending domain or from address.';
+  }
+
+  if (message.includes('Resend request failed: 422')) {
+    return 'Resend rejected the email payload. Check the from address and recipient format.';
+  }
+
+  return 'Subscription failed. Please try again.';
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -80,7 +102,7 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Subscribe handler error:', error);
     return res.status(500).json({
-      message: 'Subscription failed. Please try again.',
+      message: getClientErrorMessage(error),
     });
   }
 }
