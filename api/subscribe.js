@@ -1,6 +1,15 @@
-import { sql } from '@vercel/postgres';
+import { createPool, sql } from '@vercel/postgres';
 
 let waitlistTableReady = false;
+
+const postgresConnectionString =
+  process.env.POSTGRES_URL || process.env.polynotice_waitlist_POSTGRES_URL || null;
+
+const db = postgresConnectionString
+  ? createPool({ connectionString: postgresConnectionString })
+  : null;
+
+const dbSql = db?.sql || sql;
 
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -12,7 +21,7 @@ async function ensureWaitlistTable() {
     return;
   }
 
-  await sql`
+  await dbSql`
     CREATE TABLE IF NOT EXISTS waitlist_signups (
       id BIGSERIAL PRIMARY KEY,
       email TEXT NOT NULL UNIQUE,
@@ -23,27 +32,27 @@ async function ensureWaitlistTable() {
     );
   `;
 
-  await sql`
+  await dbSql`
     ALTER TABLE waitlist_signups
     ADD COLUMN IF NOT EXISTS ip_address TEXT;
   `;
 
-  await sql`
+  await dbSql`
     ALTER TABLE waitlist_signups
     ADD COLUMN IF NOT EXISTS source TEXT;
   `;
 
-  await sql`
+  await dbSql`
     ALTER TABLE waitlist_signups
     ADD COLUMN IF NOT EXISTS user_agent TEXT;
   `;
 
-  await sql`
+  await dbSql`
     ALTER TABLE waitlist_signups
     ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
   `;
 
-  await sql`
+  await dbSql`
     CREATE INDEX IF NOT EXISTS waitlist_signups_created_at_idx
     ON waitlist_signups (created_at DESC);
   `;
@@ -61,7 +70,7 @@ async function storeWaitlistSignup(email, request) {
   const source = request.headers.referer || request.headers.origin || null;
   const userAgent = request.headers['user-agent'] || null;
 
-  const result = await sql`
+  const result = await dbSql`
     INSERT INTO waitlist_signups (email, ip_address, source, user_agent)
     VALUES (${email}, ${ipAddress}, ${source}, ${userAgent})
     ON CONFLICT (email) DO NOTHING
@@ -74,8 +83,12 @@ async function storeWaitlistSignup(email, request) {
 function getClientErrorMessage(error) {
   const message = error?.message || '';
 
+  if (message.includes('missing_connection_string') && process.env.polynotice_waitlist_POSTGRES_URL) {
+    return 'The custom Postgres URL was found, but the database client could not initialize.';
+  }
+
   if (message.includes('missing_connection_string')) {
-    return 'Vercel Postgres is not connected in this deployment environment.';
+    return 'No Postgres connection string was found in the deployment environment.';
   }
 
   if (message.includes('password authentication failed')) {
