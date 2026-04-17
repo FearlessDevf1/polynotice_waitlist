@@ -1,30 +1,3 @@
-export const WAITLIST_CONFIRMATION_EMAIL = {
-  from: 'polynotice@proton.me',
-  subject: "You're in, welcome to PolyNotice",
-  body: `Hey,
-
-You're officially on the PolyNotice waitlist.
-
-We’re building a system designed to give prediction market traders an edge — from real-time alerts to smarter trade monitoring and automation.
-
-Right now, we’re focused on getting the core experience right before opening access.
-
-Here’s what to expect:
-
-• Early access before public launch
-• Updates as we roll out key features
-• A chance to shape how PolyNotice evolves
-
-We’ll reach out as soon as the first version is ready.
-
-If you're serious about trading prediction markets, you’ll want to be early here.
-
-Until then, stay sharp.
-
-— PolyNotice
-polynotice@proton.me`,
-};
-
 export async function subscribeEmail(email) {
   try {
     if (!email || !isValidEmail(email)) {
@@ -33,13 +6,6 @@ export async function subscribeEmail(email) {
         message: 'Please provide a valid email address',
       };
     }
-
-    // if (isLocalPreview()) {
-    //   return {
-    //     success: true,
-    //     message: 'Local preview mode: subscription simulated successfully.',
-    //   };
-    // }
 
     const response = await fetch('/api/subscribe', {
       method: 'POST',
@@ -60,7 +26,7 @@ export async function subscribeEmail(email) {
 
     return {
       success: true,
-      message: data.message || 'Successfully added to waitlist! Check your email for confirmation.',
+      message: data.message || "You're on the waitlist. We'll reach out when access opens.",
     };
   } catch (error) {
     console.error('Subscription error:', error);
@@ -86,7 +52,3 @@ function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
-
-// function isLocalPreview() {
-//   return ['localhost', '127.0.0.1'].includes(window.location.hostname);
-// }

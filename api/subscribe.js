@@ -1,84 +1,54 @@
-const WAITLIST_CONFIRMATION_EMAIL = {
-  subject: "You're in, welcome to PolyNotice",
-  text: `Hey,
+import { sql } from '@vercel/postgres';
 
-You're officially on the PolyNotice waitlist.
-
-We’re building a system designed to give prediction market traders an edge - from real-time alerts to smarter trade monitoring and automation.
-
-Right now, we’re focused on getting the core experience right before opening access.
-
-Here’s what to expect:
-
-- Early access before public launch
-- Updates as we roll out key features
-- A chance to shape how PolyNotice evolves
-
-We’ll reach out as soon as the first version is ready.
-
-If you're serious about trading prediction markets, you’ll want to be early here.
-
-Until then, stay sharp.
-
-- PolyNotice
-polynotice@proton.me`,
-};
+let waitlistTableReady = false;
 
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
-async function sendConfirmationEmail(email) {
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.RESEND_FROM_EMAIL || 'PolyNotice <onboarding@resend.dev>';
-  const replyTo = process.env.RESEND_REPLY_TO || 'polynotice@proton.me';
-
-  if (!apiKey) {
-    throw new Error('Missing RESEND_API_KEY');
+async function ensureWaitlistTable() {
+  if (waitlistTableReady) {
+    return;
   }
 
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from,
-      to: [email],
-      reply_to: replyTo,
-      subject: WAITLIST_CONFIRMATION_EMAIL.subject,
-      text: WAITLIST_CONFIRMATION_EMAIL.text,
-    }),
-  });
+  await sql`
+    CREATE TABLE IF NOT EXISTS waitlist_signups (
+      id BIGSERIAL PRIMARY KEY,
+      email TEXT NOT NULL UNIQUE,
+      ip_address TEXT,
+      source TEXT,
+      user_agent TEXT,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    );
+  `;
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Resend request failed: ${response.status} ${errorText}`);
-  }
+  await sql`
+    CREATE INDEX IF NOT EXISTS waitlist_signups_created_at_idx
+    ON waitlist_signups (created_at DESC);
+  `;
+
+  waitlistTableReady = true;
 }
 
-function getClientErrorMessage(error) {
-  const message = error?.message || '';
+async function storeWaitlistSignup(email, request) {
+  await ensureWaitlistTable();
 
-  if (message.includes('Missing RESEND_API_KEY')) {
-    return 'RESEND_API_KEY is missing in the Vercel environment variables.';
-  }
+  const forwardedFor = request.headers['x-forwarded-for'];
+  const ipAddress = Array.isArray(forwardedFor)
+    ? forwardedFor[0]
+    : forwardedFor?.split(',')[0]?.trim() || request.socket?.remoteAddress || null;
+  const source = request.headers.referer || request.headers.origin || null;
+  const userAgent = request.headers['user-agent'] || null;
 
-  if (message.includes('Resend request failed: 401')) {
-    return 'Resend rejected the API key. Check that RESEND_API_KEY is correct in Vercel.';
-  }
+  const result = await sql`
+    INSERT INTO waitlist_signups (email, ip_address, source, user_agent)
+    VALUES (${email}, ${ipAddress}, ${source}, ${userAgent})
+    ON CONFLICT (email) DO NOTHING
+    RETURNING id;
+  `;
 
-  if (message.includes('Resend request failed: 403')) {
-    return 'Resend rejected the sender configuration. Verify your sending domain or from address.';
-  }
-
-  if (message.includes('Resend request failed: 422')) {
-    return 'Resend rejected the email payload. Check the from address and recipient format.';
-  }
-
-  return 'Subscription failed. Please try again.';
+  return result.rowCount > 0;
 }
 
 export default async function handler(req, res) {
@@ -94,15 +64,17 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Please provide a valid email address' });
     }
 
-    await sendConfirmationEmail(email);
+    const wasInserted = await storeWaitlistSignup(email, req);
 
     return res.status(200).json({
-      message: "Successfully added to waitlist! Check your email for confirmation.",
+      message: wasInserted
+        ? "You're on the waitlist. We'll reach out when access opens."
+        : 'You are already on the waitlist.',
     });
   } catch (error) {
     console.error('Subscribe handler error:', error);
     return res.status(500).json({
-      message: getClientErrorMessage(error),
+      message: 'Subscription failed. Please try again.',
     });
   }
 }
