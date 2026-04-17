@@ -71,6 +71,32 @@ async function storeWaitlistSignup(email, request) {
   return result.rowCount > 0;
 }
 
+function getClientErrorMessage(error) {
+  const message = error?.message || '';
+
+  if (message.includes('missing_connection_string')) {
+    return 'Vercel Postgres is not connected in this deployment environment.';
+  }
+
+  if (message.includes('password authentication failed')) {
+    return 'Vercel Postgres credentials were rejected.';
+  }
+
+  if (message.includes('connect ECONNREFUSED') || message.includes('ENOTFOUND')) {
+    return 'The database connection failed.';
+  }
+
+  if (message.includes('relation "waitlist_signups" does not exist')) {
+    return 'The waitlist table is missing.';
+  }
+
+  if (message.includes('column') && message.includes('does not exist')) {
+    return 'The waitlist table schema is out of date.';
+  }
+
+  return 'Subscription failed. Please try again.';
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -94,7 +120,7 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Subscribe handler error:', error);
     return res.status(500).json({
-      message: 'Subscription failed. Please try again. nmmm',
+      message: getClientErrorMessage(error),
     });
   }
 }
