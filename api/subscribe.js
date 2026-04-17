@@ -1,67 +1,29 @@
-import { createPool, sql } from '@vercel/postgres';
-
-let waitlistTableReady = false;
-
-const postgresConnectionString =
-  process.env.POSTGRES_URL || process.env.polynotice_waitlist_POSTGRES_URL || null;
-
-const db = postgresConnectionString
-  ? createPool({ connectionString: postgresConnectionString })
-  : null;
-
-const dbSql = db ? db.sql.bind(db) : sql;
-
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
-async function ensureWaitlistTable() {
-  if (waitlistTableReady) {
-    return;
-  }
+function getSupabaseConfig() {
+  const url =
+    process.env.SUPABASE_URL ||
+    process.env.polynotice_waitlist_SUPABASE_URL ||
+    null;
 
-  await dbSql`
-    CREATE TABLE IF NOT EXISTS waitlist_signups (
-      id BIGSERIAL PRIMARY KEY,
-      email TEXT NOT NULL UNIQUE,
-      ip_address TEXT,
-      source TEXT,
-      user_agent TEXT,
-      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-    );
-  `;
+  const serviceRoleKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.polynotice_waitlist_SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.polynotice_waitlist_SUPABASE_SECRET_KEY ||
+    null;
 
-  await dbSql`
-    ALTER TABLE waitlist_signups
-    ADD COLUMN IF NOT EXISTS ip_address TEXT;
-  `;
-
-  await dbSql`
-    ALTER TABLE waitlist_signups
-    ADD COLUMN IF NOT EXISTS source TEXT;
-  `;
-
-  await dbSql`
-    ALTER TABLE waitlist_signups
-    ADD COLUMN IF NOT EXISTS user_agent TEXT;
-  `;
-
-  await dbSql`
-    ALTER TABLE waitlist_signups
-    ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
-  `;
-
-  await dbSql`
-    CREATE INDEX IF NOT EXISTS waitlist_signups_created_at_idx
-    ON waitlist_signups (created_at DESC);
-  `;
-
-  waitlistTableReady = true;
+  return { url, serviceRoleKey };
 }
 
 async function storeWaitlistSignup(email, request) {
-  await ensureWaitlistTable();
+  const { url, serviceRoleKey } = getSupabaseConfig();
+
+  if (!url || !serviceRoleKey) {
+    throw new Error('missing_supabase_config');
+  }
 
   const forwardedFor = request.headers['x-forwarded-for'];
   const ipAddress = Array.isArray(forwardedFor)
@@ -70,41 +32,54 @@ async function storeWaitlistSignup(email, request) {
   const source = request.headers.referer || request.headers.origin || null;
   const userAgent = request.headers['user-agent'] || null;
 
-  const result = await dbSql`
-    INSERT INTO waitlist_signups (email, ip_address, source, user_agent)
-    VALUES (${email}, ${ipAddress}, ${source}, ${userAgent})
-    ON CONFLICT (email) DO NOTHING
-    RETURNING id;
-  `;
+  const response = await fetch(`${url}/rest/v1/waitlist_signups?on_conflict=email`, {
+    method: 'POST',
+    headers: {
+      apikey: serviceRoleKey,
+      Authorization: `Bearer ${serviceRoleKey}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=representation,resolution=ignore-duplicates',
+    },
+    body: JSON.stringify([
+      {
+        email,
+        ip_address: ipAddress,
+        source,
+        user_agent: userAgent,
+      },
+    ]),
+  });
 
-  return result.rowCount > 0;
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`supabase_request_failed:${response.status}:${errorText}`);
+  }
+
+  const rows = await response.json();
+  return rows.length > 0;
 }
 
 function getClientErrorMessage(error) {
   const message = error?.message || '';
 
-  if (message.includes('missing_connection_string') && process.env.polynotice_waitlist_POSTGRES_URL) {
-    return 'The custom Postgres URL was found, but the database client could not initialize.';
+  if (message.includes('missing_supabase_config')) {
+    return 'Supabase configuration is missing in the deployment environment.';
   }
 
-  if (message.includes('missing_connection_string')) {
-    return 'No Postgres connection string was found in the deployment environment.';
+  if (message.includes('supabase_request_failed:401')) {
+    return 'Supabase rejected the server key.';
   }
 
-  if (message.includes('password authentication failed')) {
-    return 'Vercel Postgres credentials were rejected.';
+  if (message.includes('supabase_request_failed:404')) {
+    return 'The waitlist_signups table was not found in Supabase.';
   }
 
-  if (message.includes('connect ECONNREFUSED') || message.includes('ENOTFOUND')) {
+  if (message.includes('supabase_request_failed:42')) {
+    return 'The waitlist_signups table schema needs to be created or updated.';
+  }
+
+  if (message.includes('fetch failed') || message.includes('ENOTFOUND')) {
     return 'The database connection failed.';
-  }
-
-  if (message.includes('relation "waitlist_signups" does not exist')) {
-    return 'The waitlist table is missing.';
-  }
-
-  if (message.includes('column') && message.includes('does not exist')) {
-    return 'The waitlist table schema is out of date.';
   }
 
   return 'Subscription failed. Please try again.';
