@@ -24,6 +24,26 @@ async function ensureWaitlistTable() {
   `;
 
   await sql`
+    ALTER TABLE waitlist_signups
+    ADD COLUMN IF NOT EXISTS ip_address TEXT;
+  `;
+
+  await sql`
+    ALTER TABLE waitlist_signups
+    ADD COLUMN IF NOT EXISTS source TEXT;
+  `;
+
+  await sql`
+    ALTER TABLE waitlist_signups
+    ADD COLUMN IF NOT EXISTS user_agent TEXT;
+  `;
+
+  await sql`
+    ALTER TABLE waitlist_signups
+    ADD COLUMN IF NOT EXISTS created_at TIMESTAMPTZ NOT NULL DEFAULT NOW();
+  `;
+
+  await sql`
     CREATE INDEX IF NOT EXISTS waitlist_signups_created_at_idx
     ON waitlist_signups (created_at DESC);
   `;
@@ -74,7 +94,7 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Subscribe handler error:', error);
     return res.status(500).json({
-      message: 'Subscription failed. Please try again.',
+      message: 'Subscription failed. Please try again. nmmm',
     });
   }
 }
