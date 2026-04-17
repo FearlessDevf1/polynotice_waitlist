@@ -9,7 +9,7 @@ const db = postgresConnectionString
   ? createPool({ connectionString: postgresConnectionString })
   : null;
 
-const dbSql = db?.sql || sql;
+const dbSql = db ? db.sql.bind(db) : sql;
 
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
