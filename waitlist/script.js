@@ -76,9 +76,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const finalCtaForm = document.getElementById('final-cta-form');
   const finalCtaEmail = document.getElementById('final-cta-email');
   const finalCtaMessage = document.getElementById('final-cta-message');
+  const joinWaitlistBtn = document.getElementById('join-waitlist-btn');
+  const waitlistSection = document.getElementById('waitlist');
 
   if (finalCtaForm && finalCtaEmail && finalCtaMessage) {
     handleFormSubmit(finalCtaForm, finalCtaEmail, finalCtaMessage);
+  }
+
+  if (joinWaitlistBtn && waitlistSection) {
+    joinWaitlistBtn.addEventListener('click', () => {
+      waitlistSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
 });
 
